@@ -4,8 +4,6 @@ sidebar_position: 10
 weight: 5
 ---
 
-# Introduction
-
 **AWS Elastic Kubernetes Service (EKS) 워크샵**에 오신 것을 환영합니다!
 
 이 워크샵은 EKS가 제공하는 다양한 기능과 AWS가 제공하는 광범위한 서비스들과의 통합 방법을 학습하고 탐구할 수 있는 실습 과정을 안내합니다. 실습은 다음과 같은 영역으로 구성되어 있습니다:
@@ -22,4 +20,4 @@ weight: 5
 
 Amazon EKS의 기초에 대해 알아보시려면 다음의 약 10분 분량의 동영상을 시청하세요:
 
-\
+<ReactPlayer controls url="https://www.youtube.com/watch?v=E956xeOt050" /> <br />
