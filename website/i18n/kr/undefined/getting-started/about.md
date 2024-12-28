@@ -2,7 +2,7 @@
 
 Most of the labs in this workshop use a common sample application to provide actual container components that we can work on during the exercises. The sample application models a simple web store application, where customers can browse a catalog, add items to their cart and complete an order through the checkout process.
 
-![](%7Brequire\('@site/static/img/sample-app-screens/home.webp'\).default%7D)
+![](../../introduction/getting-started/%7Brequire\('@site/static/img/sample-app-screens/home.webp'\).default%7D)
 
 The application has several components and dependencies:
 

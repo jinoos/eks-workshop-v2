@@ -1,4 +1,4 @@
-# Introduction
+# 소개
 
 **AWS Elastic Kubernetes Service (EKS) 워크샵**에 오신 것을 환영합니다!
 

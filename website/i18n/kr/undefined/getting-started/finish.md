@@ -56,4 +56,4 @@ ui          ui               1/1     1            1           90s
 
 The sample application is now deployed and ready to provide a foundation for us to use in the rest of the labs in this workshop!
 
-:::tip If you want to understand more about Kustomize take a look at the [optional module](../kustomize/index.md) provided in this workshop. :::
+:::tip If you want to understand more about Kustomize take a look at the [optional module](../index-1.md) provided in this workshop. :::
