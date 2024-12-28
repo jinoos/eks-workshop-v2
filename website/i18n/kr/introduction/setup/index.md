@@ -5,4 +5,4 @@
 두가지 선택사항이 있습니다:
 
 1. [AWS 이벤트 활용](aws-event.md)
-2. [자신의 AWS 계정 활용](index/)
+2. [자신의 AWS 계정 활용](your-account/index.md)

@@ -22,7 +22,7 @@ For example, take a look at the following manifest file for the `checkout` Deplo
 manifests/base-application/checkout/deployment.yaml
 ```
 
-This file has already been applied in the previous [Getting Started](../introduction/getting-started/) lab, but let's say we wanted to scale this component horizontally by updating the `replicas` field using Kustomize. Rather than manually updating this YAML file, we'll use Kustomize to update the `spec/replicas` field from 1 to 3.
+This file has already been applied in the previous [Getting Started](../getting-started/) lab, but let's say we wanted to scale this component horizontally by updating the `replicas` field using Kustomize. Rather than manually updating this YAML file, we'll use Kustomize to update the `spec/replicas` field from 1 to 3.
 
 To do so, we'll apply the following kustomization.
 
@@ -93,6 +93,6 @@ $ kubectl kustomize ~/environment/eks-workshop/base-application \
 
 This uses `envsubst` to substitute environment variable placeholders in the Kubernetes manifest files with the actual values based on your particular environment. For example in some manifests we need to reference the EKS cluster name with `$EKS_CLUSTER_NAME` or the AWS region with `$AWS_REGION`.
 
-Now that you understand how Kustomize works, you can proceed to the [Helm module](../../../../docs/introduction/helm/) or go directly to the [Fundamentals module](../../../../docs/fundamentals/).
+Now that you understand how Kustomize works, you can proceed to the [Helm module](../../../../../docs/introduction/helm/) or go directly to the [Fundamentals module](../../../../../docs/fundamentals/).
 
 To learn more about Kustomize, you can refer to the official Kubernetes [documentation](https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/).

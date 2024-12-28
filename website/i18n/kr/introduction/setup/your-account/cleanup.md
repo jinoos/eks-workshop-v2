@@ -4,8 +4,8 @@
 
 Make sure you have run the respective clean up instructions for the mechanism you used to provision the lab EKS cluster before proceeding.
 
-* [eksctl](../../../introduction/setup/your-account/using-eksctl/)
-* [Terraform](../../../introduction/setup/your-account/using-terraform/)
+* [eksctl](using-eksctl/)
+* [Terraform](using-terraform/)
 
 :::
 

@@ -7,10 +7,6 @@ sidebar_position: 1
 
 ## EKS Workshop
 
-Practical exercises to learn about Amazon Elastic Kubernetes Service
+Amazon Elastic Kubernetes Service (EKS)에 대해 배우기 위한 실용적인 연습:
 
-[Get Started!](https://www.eksworkshop.com/docs/introduction)
-
-```bash
-$ echo 'Dummy'
-```
+[Get Started!](undefined/)

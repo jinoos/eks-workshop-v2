@@ -4,17 +4,17 @@ The sample application is composed of a set of Kubernetes manifests organized in
 
 The easiest way to browse the YAML manifests for the sample application and the modules in this workshop is using the file browser in the IDE:
 
-![Cloud9 files](../../introduction/getting-started/assets/cloud9-files-initial.webp)
+![Cloud9 files](assets/cloud9-files-initial.webp)
 
 Expanding the `eks-workshop` and then `base-application` items will allow you to browse the manifests that make up the initial state of the sample application:
 
-![Cloud9 files base](../../introduction/getting-started/assets/cloud9-files-base.webp)
+![Cloud9 files base](assets/cloud9-files-base.webp)
 
 The structure consists of a directory for each application component that was outlined in the **Sample application** section.
 
 The `modules` directory contains sets of manifests that we will apply to the cluster throughout the subsequent lab exercises:
 
-![Cloud9 files modules](../../introduction/getting-started/assets/cloud9-files-modules.webp)
+![Cloud9 files modules](assets/cloud9-files-modules.webp)
 
 Before we do anything lets inspect the current Namespaces in our EKS cluster:
 
