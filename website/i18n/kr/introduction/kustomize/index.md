@@ -1,15 +1,21 @@
 ---
 title: Kustomize
-sidebar_custom_props: { "module": true }
+sidebar_custom_props:
+  module: true
 sidebar_position: 40
 ---
 
+# Kustomize
+
 ::required-time
 
-:::tip Before you start
-Prepare your environment for this section:
+:::tip Before you start Prepare your environment for this section:
 
-```bash timeout=300 wait=10
+### 환경 설정 준비
+
+이 섹션을 시작하기 전에 환경 준비를 해주세요:
+
+```bash
 $ prepare-environment
 ```
 
@@ -23,13 +29,13 @@ For example, take a look at the following manifest file for the `checkout` Deplo
 manifests/base-application/checkout/deployment.yaml
 ```
 
-This file has already been applied in the previous [Getting Started](../getting-started) lab, but let's say we wanted to scale this component horizontally by updating the `replicas` field using Kustomize. Rather than manually updating this YAML file, we'll use Kustomize to update the `spec/replicas` field from 1 to 3.
+This file has already been applied in the previous [Getting Started](../getting-started/) lab, but let's say we wanted to scale this component horizontally by updating the `replicas` field using Kustomize. Rather than manually updating this YAML file, we'll use Kustomize to update the `spec/replicas` field from 1 to 3.
 
 To do so, we'll apply the following kustomization.
 
-- The first tab shows the kustomization we're applying
-- The second tab shows a preview of what the updated `Deployment/checkout` file looks like after the kustomization is applied
-- Finally, the third tab shows just the diff of what has changed
+* The first tab shows the kustomization we're applying
+* The second tab shows a preview of what the updated `Deployment/checkout` file looks like after the kustomization is applied
+* Finally, the third tab shows just the diff of what has changed
 
 ```kustomization
 modules/introduction/kustomize/deployment.yaml
@@ -81,7 +87,7 @@ $ kubectl apply -k ~/environment/eks-workshop/modules/introduction/kustomize
 
 To reset the application manifests back to their initial state, you can simply apply the original set of manifests:
 
-```bash timeout=300 wait=30
+```bash
 $ kubectl apply -k ~/environment/eks-workshop/base-application
 ```
 
@@ -94,6 +100,6 @@ $ kubectl kustomize ~/environment/eks-workshop/base-application \
 
 This uses `envsubst` to substitute environment variable placeholders in the Kubernetes manifest files with the actual values based on your particular environment. For example in some manifests we need to reference the EKS cluster name with `$EKS_CLUSTER_NAME` or the AWS region with `$AWS_REGION`.
 
-Now that you understand how Kustomize works, you can proceed to the [Helm module](/docs/introduction/helm) or go directly to the [Fundamentals module](/docs/fundamentals).
+Now that you understand how Kustomize works, you can proceed to the [Helm module](../../../../../docs/introduction/helm/) or go directly to the [Fundamentals module](../../../../../docs/fundamentals/).
 
 To learn more about Kustomize, you can refer to the official Kubernetes [documentation](https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/).
