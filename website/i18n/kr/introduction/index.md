@@ -1,8 +1,4 @@
----
-title: Introduction
-sidebar_position: 10
-weight: 5
----
+# Introduction
 
 **AWS Elastic Kubernetes Service (EKS) 워크샵**에 오신 것을 환영합니다!
 
@@ -20,4 +16,6 @@ weight: 5
 
 Amazon EKS의 기초에 대해 알아보시려면 다음의 약 10분 분량의 동영상을 시청하세요:
 
-<ReactPlayer controls url="https://www.youtube.com/watch?v=E956xeOt050" /> <br />
+{% embed url="https://www.youtube.com/watch?v=E956xeOt050" %}
+Youtube - Aamzon EKS Explained
+{% endembed %}

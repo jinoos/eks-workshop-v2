@@ -1,15 +1,10 @@
----
-title: Helm
-sidebar_custom_props: { "module": true }
-sidebar_position: 50
----
+# Helm
 
 ::required-time
 
-:::tip Before you start
-Prepare your environment for this section:
+:::tip Before you start Prepare your environment for this section:
 
-```bash timeout=600 wait=10
+```bash
 $ prepare-environment introduction/helm
 ```
 
@@ -25,7 +20,7 @@ This lab does not cover the authoring of Helm charts for your own workloads. For
 
 [Helm](https://helm.sh) is a package manager for Kubernetes that helps you define, install, and upgrade Kubernetes applications. It uses a packaging format called charts, which contain all the necessary Kubernetes resource definitions to run an application. Helm simplifies the deployment and management of applications on Kubernetes clusters.
 
-## Helm CLI
+### Helm CLI
 
 The `helm` CLI tool is typically used in conjunction with a Kubernetes cluster to manage the deployment and lifecycle of applications. It provides a consistent and repeatable way to package, install, and manage applications on Kubernetes, making it easier to automate and standardize application deployments across different environments.
 
@@ -35,7 +30,7 @@ The CLI is already installed in our IDE:
 $ helm version
 ```
 
-## Helm repositories
+### Helm repositories
 
 A Helm repository is a centralized location where Helm charts are stored and managed, and allow users to easily discover, share, and install charts. They facilitate easy access to a wide range of pre-packaged applications and services for deployment on Kubernetes clusters.
 
@@ -55,7 +50,7 @@ bitnami/nginx           X.X.X           X.X.X           NGINX Open Source is a w
 [...]
 ```
 
-## Installing a Helm chart
+### Installing a Helm chart
 
 Let's install an NGINX server in our EKS cluster using the Helm chart we found above. When you install a chart using the Helm package manager, it creates a new **release** for that chart. Each release is tracked by Helm and can be upgraded, rolled back, or uninstalled independently from other releases.
 
@@ -68,11 +63,11 @@ $ helm install nginx bitnami/nginx \
 
 We can break this command down as follows:
 
-- Use the `install` sub-command to instruct Helm to install a chart
-- Name the release `nginx`
-- Use the chart `bitnami/nginx` with the version $NGINX_CHART_VERSION
-- Install the chart in the `nginx` namespace and create that namespace first
-- Wait for pods in the release to get to a ready state
+* Use the `install` sub-command to instruct Helm to install a chart
+* Name the release `nginx`
+* Use the chart `bitnami/nginx` with the version $NGINX\_CHART\_VERSION
+* Install the chart in the `nginx` namespace and create that namespace first
+* Wait for pods in the release to get to a ready state
 
 Once the chart has installed we can list the releases in our EKS cluster:
 
@@ -90,14 +85,14 @@ NAME                     READY   STATUS    RESTARTS   AGE
 nginx-55fbd7f494-zplwx   1/1     Running   0          119s
 ```
 
-## Configuring chart options
+### Configuring chart options
 
 In the example above we installed the NGINX chart in its default configuration. Sometimes you'll need to provide configuration **values** to charts during installation to modify the way the component behaves.
 
 There are two common ways to provide values to charts during installation:
 
 1. Create YAML files and pass them to Helm using the `-f` or `--values` flag
-1. Pass values using the `--set` flag followed by `key=value` pairs
+2. Pass values using the `--set` flag followed by `key=value` pairs
 
 Let's combine these methods to update our NGINX release. We'll use this `values.yaml` file:
 
@@ -148,7 +143,7 @@ nginx-55fbd7f494-zplwx   1/1     Running   0          5m
 
 You can see we now have 3 replicas of the NGINX pod running.
 
-## Removing releases
+### Removing releases
 
 We can similarly uninstall a release using the CLI:
 
@@ -158,4 +153,4 @@ $ helm uninstall nginx --namespace nginx --wait
 
 This will delete all the resources created by the chart for that release from our EKS cluster.
 
-Now that you understand how Helm works, proceed to the [Fundamentals module](/docs/fundamentals).
+Now that you understand how Helm works, proceed to the [Fundamentals module](../../../../../docs/fundamentals/).

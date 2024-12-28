@@ -1,9 +1,8 @@
 ---
-title: Getting started
-sidebar_position: 30
-sidebar_custom_props: { "module": true }
-description: "Learn the basics of running workloads on Amazon Elastic Kubernetes Service."
+description: Learn the basics of running workloads on Amazon Elastic Kubernetes Service.
 ---
+
+# Getting started
 
 ::required-time
 

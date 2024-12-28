@@ -1,23 +1,20 @@
----
-title: Using eksctl
-sidebar_position: 20
----
+# Using eksctl
 
 This section outlines how to build a cluster for the lab exercises using the [eksctl tool](https://eksctl.io/). This is the easiest way to get started, and is recommended for most learners.
 
 The `eksctl` utility has been pre-installed in your Amazon Cloud9 Environment, so we can immediately create the cluster. This is the configuration that will be used to build the cluster:
 
-```file hidePath=true
+```file
 manifests/../cluster/eksctl/cluster.yaml
 ```
 
 Based on this configuration `eksctl` will:
 
-- Create a VPC across three availability zones
-- Create an EKS cluster
-- Create an IAM OIDC provider
-- Add a managed node group named `default`
-- Configure the VPC CNI to use prefix delegation
+* Create a VPC across three availability zones
+* Create an EKS cluster
+* Create an IAM OIDC provider
+* Add a managed node group named `default`
+* Configure the VPC CNI to use prefix delegation
 
 Apply the configuration file like so:
 
@@ -29,14 +26,13 @@ envsubst | eksctl create cluster -f -
 
 This process will take around 20 minutes.
 
-## Next Steps
+### Next Steps
 
-Now that the cluster is ready, head to the [Navigating the labs](/docs/introduction/navigating-labs) section or skip ahead to any module in the workshop with the top navigation bar. Once you're completed with the workshop, follow the steps below to clean-up your environment.
+Now that the cluster is ready, head to the [Navigating the labs](../../../../../../docs/introduction/navigating-labs/) section or skip ahead to any module in the workshop with the top navigation bar. Once you're completed with the workshop, follow the steps below to clean-up your environment.
 
-## Cleaning Up (steps once you are done with the Workshop)
+### Cleaning Up (steps once you are done with the Workshop)
 
-:::tip
-The following demonstrates how you will later clean up resources once you are done using the EKS cluster you created in previous steps to complete the modules.  
+:::tip The following demonstrates how you will later clean up resources once you are done using the EKS cluster you created in previous steps to complete the modules.\
 :::
 
 Before deleting the Cloud9/VSCode IDE environment we need to clean up the cluster that we set up in previous steps.
