@@ -1,2 +1,0 @@
-# managed-node-groups
-

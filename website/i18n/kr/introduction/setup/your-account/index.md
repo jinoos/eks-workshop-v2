@@ -1,9 +1,9 @@
 # 자신의 AWS 계정 활용
 
 {% hint style="danger" %}
-Warning
+경고
 
-귀하의 AWS 계정에 이 워크샵 환경을 프로비저닝하면 리소스가 생성되며 **비용이 발생할 수 있습니다**. [CleanUp 섹션](../../../index.md)에서는 추가 요금을 방지하기 위해 리소스를 제거하는 방법을 안내합니다.
+귀하의 AWS 계정에 이 워크샵 환경을 프로비저닝하면 리소스가 생성되며 **비용이 발생할 수 있습니다**. [CleanUp 섹션](../../../index-1.md)에서는 추가 요금을 방지하기 위해 리소스를 제거하는 방법을 안내합니다.
 {% endhint %}
 
 이 섹션에서는 자신의 AWS 계정에서 실습을 실행하기 위한 환경 설정 방법을 설명합니다.
@@ -23,9 +23,9 @@ These instructions have been tested in the AWS regions listed above and are not 
 
 
 {% hint style="danger" %}
-워크숍 자료의 특성상 IDE EC2 인스턴스가 계정 내에서 광범위한 IAM 권한을 필요로 합니다. 예를 들어, IAM 역할 생성 등이 있습니다. 계속 진행하기 전에 CloudFormation 템플릿에서 IDE 인스턴스에 제공될 IAM 권한을 검토하십시오.
+경고
 
-We are continuously working to optimize the IAM permissions. Please raise a [GitHub issue](https://github.com/aws-samples/eks-workshop-v2/issues) with any suggestions for improvement.
+워크숍 자료의 특성상 IDE EC2 인스턴스가 계정 내에서 광범위한 IAM 권한을 필요로 합니다. 예를 들어, IAM 역할 생성 등이 있습니다. 계속 진행하기 전에 CloudFormation 템플릿에서 IDE 인스턴스에 제공될 IAM 권한을 검토하십시오.
 
 IAM 권한 최적화를 위해 지속적으로 노력하고 있습니다. 개선 제안 사항이 있으면 [GitHub 이슈](https://github.com/aws-samples/eks-workshop-v2/issues)를 제기해 주세요
 {% endhint %}

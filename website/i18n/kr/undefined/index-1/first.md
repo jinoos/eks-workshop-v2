@@ -1,22 +1,22 @@
 # 첫 컴포넌트 배포
 
-The sample application is composed of a set of Kubernetes manifests organized in a way that can be easily applied with Kustomize. Kustomize is an open-source tool also provided as a native feature of the `kubectl` CLI. This workshop uses Kustomize to apply changes to Kubernetes manifests, making it easier to understand changes to manifest files without needing to manually edit YAML. As we work through the various modules of this workshop, we'll incrementally apply overlays and patches with Kustomize.
+샘플 애플리케이션은 Kustomize를 사용하여 쉽게 적용할 수 있도록 구성된 Kubernetes 매니페스트 세트로 구성되어 있습니다. Kustomize는 오픈 소스 도구이며 `kubectl` CLI의 기본 기능으로도 제공됩니다. 이 워크샵에서는 Kustomize를 사용하여 Kubernetes 매니페스트를 변경하므로, YAML을 수동으로 편집할 필요 없이 매니페스트 파일의 변경 사항을 쉽게 이해할 수 있습니다. 이 워크샵의 다양한 모듈을 진행하면서 Kustomize를 사용하여 오버레이와 패치를 점진적으로 적용할 것입니다.
 
-The easiest way to browse the YAML manifests for the sample application and the modules in this workshop is using the file browser in the IDE:
+IDE의 파일 브라우저를 사용하는 것이 이 워크샵의 샘플 애플리케이션과 모듈에 대한 YAML 매니페스트를 탐색하는 가장 쉬운 방법입니다:
 
 ![Cloud9 files](../../introduction/getting-started/assets/cloud9-files-initial.webp)
 
-Expanding the `eks-workshop` and then `base-application` items will allow you to browse the manifests that make up the initial state of the sample application:
+`eks-workshop`와 `base-application` 항목을 확장하면 샘플 애플리케이션의 초기 상태를 구성하는 매니페스트를 탐색할 수 있습니다:
 
 ![Cloud9 files base](../../introduction/getting-started/assets/cloud9-files-base.webp)
 
-The structure consists of a directory for each application component that was outlined in the **Sample application** section.
+구조는 [셈플 어플리케이션](about.md) 섹션에서 설명한 각 애플리케이션 컴포넌트의 디렉토리로 구성되어 있습니다.
 
-The `modules` directory contains sets of manifests that we will apply to the cluster throughout the subsequent lab exercises:
+`modules` 디렉토리에는 이후 실습 과정에서 클러스터에 적용할 매니페스트 세트가 포함되어 있습니다:
 
 ![Cloud9 files modules](../../introduction/getting-started/assets/cloud9-files-modules.webp)
 
-Before we do anything lets inspect the current Namespaces in our EKS cluster:
+먼저 EKS 클러스터의 현재 Namespace를 검사해보겠습니다:
 
 ```bash
 $ kubectl get namespaces
@@ -27,14 +27,14 @@ kube-public                     Active   1h
 kube-system                     Active   1h
 ```
 
-All of the entries listed are Namespaces for system components that were pre-installed for us. We'll ignore these by using [Kubernetes labels](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/) to filter the Namespaces down to only those we've created:
+나열된 모든 항목은 사전 설치된 시스템 컴포넌트의 Namespace입니다. [Kubernetes 레이블](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)을 사용하여 우리가 생성한 Namespace만 필터링하여 이들을 무시할 것입니다:
 
 ```bash
 $ kubectl get namespaces -l app.kubernetes.io/created-by=eks-workshop
 No resources found
 ```
 
-The first thing we'll do is deploy the catalog component by itself. The manifests for this component can be found in `~/environment/eks-workshop/base-application/catalog`.
+첫 번째로 catalog 컴포넌트를 단독으로 배포할 것입니다. 이 컴포넌트의 매니페스트는 `~/environment/eks-workshop/base-application/catalog`에서 찾을 수 있습니다.
 
 ```bash
 $ ls ~/environment/eks-workshop/base-application/catalog
@@ -49,34 +49,34 @@ serviceAccount.yaml
 statefulset-mysql.yaml
 ```
 
-These manifests include the Deployment for the catalog API:
+이 매니페스트에는 `catalog` API의 Deployment가 포함됩니다:
 
 ```file
 manifests/base-application/catalog/deployment.yaml
 ```
 
-This Deployment expresses the desired state of the catalog API component:
+이 Deployment는 `catalog` API 컴포넌트의 원하는 상태를 표현합니다:
 
-* Use the `public.ecr.aws/aws-containers/retail-store-sample-catalog` container image
-* Run a single replica
-* Expose the container on port 8080 named `http`
-* Run [probes/healthchecks](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) against the `/health` path
-* [Requests](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) a specific amount of CPU and memory so the Kubernetes scheduler can place it on a node with enough available resources
-* Apply labels to the Pods so other resources can refer to them
+* `public.ecr.aws/aws-containers/retail-store-sample-catalog` 컨테이너 이미지 사용 주석
+* 단일 복제본 실행
+* `http`라는 이름으로 포트 `8080` 노출
+* `/health` 경로에 대해 [탐색/헬스체크](../../) 실행
+* Kubernetes 스케줄러가 충분한 가용 리소스가 있는 노드에 배치할 수 있도록 특정 CPU와 메모리 양을 [요청](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/)
+* 다른 리소스가 참조할 수 있도록 Pod에 레이블 적용
 
-The manifests also include the Service used by other components to access the catalog API:
+매니페스트에는 다른 컴포넌트들이 catalog API에 접근하는 데 사용하는 Service도 포함됩니다:
 
 ```file
 manifests/base-application/catalog/service.yaml
 ```
 
-This Service:
+이 Service는:
 
-* Selects catalog Pods using labels that match what we expressed in the Deployment above
-* Exposes itself on port 80
-* Targets the `http` port exposed by the Deployment, which translates to port 8080
+* 위의 Deployment에서 표현한 것과 일치하는 레이블을 사용하여 `catalog` Pod 선택
+* 포트 `80`에서 자신을 노출
+* Deployment에서 노출한 `http` 포트(포트 `8080`로 변환)를 대상으로 함
 
-Let's create the catalog component:
+`catalog` 컴포넌트를 생성해보겠습니다
 
 ```bash
 $ kubectl apply -k ~/environment/eks-workshop/base-application/catalog
@@ -90,7 +90,7 @@ deployment.apps/catalog created
 statefulset.apps/catalog-mysql created
 ```
 
-Now we'll see a new Namespace:
+이제 새로운 Namespace가 보일 것입니다:
 
 ```bash
 $ kubectl get namespaces -l app.kubernetes.io/created-by=eks-workshop
@@ -98,7 +98,7 @@ NAME      STATUS   AGE
 catalog   Active   15s
 ```
 
-We can take a look at the Pods running in this namespace:
+이 Namespace에서 실행 중인 Pod들을 살펴보겠습니다:
 
 ```bash
 $ kubectl get pod -n catalog
@@ -107,21 +107,25 @@ catalog-846479dcdd-fznf5   1/1     Running   2 (43s ago)   46s
 catalog-mysql-0            1/1     Running   0             46s
 ```
 
-Notice we have a Pod for our catalog API and another for the MySQL database. If the `catalog` Pod is showing a status of `CrashLoopBackOff`, it needs to be able to connect to the `catalog-mysql` Pod before it will start. Kubernetes will keep restarting it until this is the case. In that case, we can use [kubectl wait](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#wait) to monitor specific Pods until they are in a Ready state:
+`catalog` API용 Pod와 MySQL 데이터베이스용 Pod가 있는 것을 확인할 수 있습니다. `catalog` Pod가 `CrashLoopBackOff` 상태를 보이는 경우, 시작하기 전에 `catalog-mysql` Pod에 연결할 수 있어야 합니다. Kubernetes는 이 조건이 충족될 때까지 계속해서 재시작할 것입니다. 이 경우, [kubectl wait](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#wait)를 사용하여 특정 Pod가 Ready 상태가 될 때까지 모니터링할 수 있습니다:
 
 ```bash
 $ kubectl wait --for=condition=Ready pods --all -n catalog --timeout=180s
 ```
 
-Now that the Pods are running we can [check their logs](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#logs), for example the catalog API:
+Pod가 실행 중이면 [로그를 확인](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#logs)할 수 있습니다. 예를 들어 `catalog` API의 경우:
 
-:::tip You can ["follow" the kubectl logs output](https://kubernetes.io/docs/reference/kubectl/cheatsheet/) by using the '-f' option with the command. (Use CTRL-C to stop following the output) :::
+{% hint style="success" %}
+팁
+
+명령어에 '-f' 옵션을 사용하여 [kubectl logs 출력을 "follow"](https://kubernetes.io/docs/reference/kubectl/quick-reference/)할 수 있습니다. (CTRL-C를 사용하여 팔로우를 중지할 수 있습니다)
+{% endhint %}
 
 ```bash
 $ kubectl logs -n catalog deployment/catalog
 ```
 
-Kubernetes also allows us to easily scale the number of catalog Pods horizontally:
+Kubernetes는 또한 `catalog` Pod의 수를 수평적으로 쉽게 확장할 수 있게 해줍니다:
 
 ```bash
 $ kubectl scale -n catalog --replicas 3 deployment/catalog
@@ -129,7 +133,7 @@ deployment.apps/catalog scaled
 $ kubectl wait --for=condition=Ready pods --all -n catalog --timeout=180s
 ```
 
-The manifests we applied also create a Service for each of our application and MySQL Pods that can be used by other components in the cluster to connect:
+우리가 적용한 매니페스트는 클러스터의 다른 컴포넌트들이 연결하는 데 사용할 수 있는 애플리케이션과 MySQL Pod를 위한 Service도 각각 생성합니다:
 
 ```bash
 $ kubectl get svc -n catalog
@@ -138,11 +142,11 @@ catalog         ClusterIP   172.20.83.84     <none>        80/TCP     2m48s
 catalog-mysql   ClusterIP   172.20.181.252   <none>        3306/TCP   2m48s
 ```
 
-These Services are internal to the cluster, so we cannot access them from the Internet or even the VPC. However, we can use [exec](https://kubernetes.io/docs/tasks/debug/debug-application/get-shell-running-container/) to access an existing Pod in the EKS cluster to check the catalog API is working:
+이러한 Service들은 클러스터 내부용이므로, 인터넷이나 VPC에서도 접근할 수 없습니다. 하지만 [exec](https://kubernetes.io/docs/tasks/debug/debug-application/get-shell-running-container/)를 사용하여 EKS 클러스터의 기존 Pod에 접근하여 `catalog` API가 작동하는지 확인할 수 있습니다:
 
 ```bash
 $ kubectl -n catalog exec -it \
   deployment/catalog -- curl catalog.catalog.svc/catalogue | jq .
 ```
 
-You should receive back a JSON payload with product information. Congratulations, you've just deployed your first microservice to Kubernetes with EKS!
+제품 정보가 포함된 JSON 페이로드를 받아야 합니다. 축하합니다, EKS에서 Kubernetes로 첫 번째 마이크로서비스를 배포하셨습니다!

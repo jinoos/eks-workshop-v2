@@ -1,2 +1,0 @@
-# fsx-for-netapp-ontap
-
