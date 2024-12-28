@@ -1,15 +1,14 @@
 # 자신의 AWS 계정 활용
 
-import Tabs from '@theme/Tabs';\
-import TabItem from '@theme/TabItem';
+{% hint style="danger" %}
+Warning
 
+귀하의 AWS 계정에 이 워크샵 환경을 프로비저닝하면 리소스가 생성되며 **비용이 발생할 수 있습니다**. [CleanUp 섹션](../../../index.md)에서는 추가 요금을 방지하기 위해 리소스를 제거하는 방법을 안내합니다.
+{% endhint %}
 
+이 섹션에서는 자신의 AWS 계정에서 실습을 실행하기 위한 환경 설정 방법을 설명합니다.
 
-:::danger Warning Provisioning this workshop environment in your AWS account will create resources and **there will be cost associated with them**. The cleanup section provides a guide to remove them, preventing further charges. :::
-
-This section outlines how to set up the environment to run the labs in your own AWS account.
-
-The first step is to create an IDE with the provided CloudFormation templates. Use the AWS CloudFormation quick-create links below to launch the desired template in the appropriate AWS region.
+첫 번째 단계는 제공된 CloudFormation 템플릿을 사용하여 IDE를 생성하는 것입니다. 아래의 AWS CloudFormation 빠른 생성 링크를 사용하여 적절한 AWS 지역에서 원하는 템플릿을 시작하세요.
 
 | Region           | Link                                                                                                                                                                                                                                                                                                                                |
 | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -19,45 +18,49 @@ The first step is to create an IDE with the provided CloudFormation templates. U
 
 These instructions have been tested in the AWS regions listed above and are not guaranteed to work in others without modification.
 
-:::warning
+위의 AWS 지역에서 이 지침들은 테스트되었으며, 다른 지역에서는 수정 없이 작동할 것을 보장하지 않습니다.
 
-The nature of the workshop material means that the IDE EC2 instance requires broad IAM permissions in your account, for example creating IAM roles. Before continuing please review the IAM permissions that will be provided to the IDE instance in the CloudFormation template.
+
+
+{% hint style="danger" %}
+워크숍 자료의 특성상 IDE EC2 인스턴스가 계정 내에서 광범위한 IAM 권한을 필요로 합니다. 예를 들어, IAM 역할 생성 등이 있습니다. 계속 진행하기 전에 CloudFormation 템플릿에서 IDE 인스턴스에 제공될 IAM 권한을 검토하십시오.
 
 We are continuously working to optimize the IAM permissions. Please raise a [GitHub issue](https://github.com/aws-samples/eks-workshop-v2/issues) with any suggestions for improvement.
 
-:::
+IAM 권한 최적화를 위해 지속적으로 노력하고 있습니다. 개선 제안 사항이 있으면 [GitHub 이슈](https://github.com/aws-samples/eks-workshop-v2/issues)를 제기해 주세요
+{% endhint %}
 
-Scroll to the bottom of the screen and acknowledge the IAM notice:
+화면 하단으로 스크롤하여 IAM 공지를 확인합니다:
 
 ![acknowledge IAM](assets/acknowledge-iam.webp)
 
-Then click the **Create stack** button:
+그런 다음 **스택 생성** 버튼을 클릭합니다.
 
 ![Create Stack](assets/create-stack.webp)
 
-The CloudFormation stack will take roughly 5 minutes to deploy, and once completed you can retrieve information required to continue from the **Outputs** tab:
+CloudFormation 스택은 배포하는 데 약 5분이 소요되며, 배포가 완료되면 **Outputs** 탭에서 계속 진행하는데 필요한 정보를 확인할 수 있습니다:
 
 ![cloudformation outputs](assets/vscode-outputs.webp)
 
-The `IdeUrl` output contains the URL to enter in your browser to access the IDE. The `IdePasswordSecret` contains a link to an AWS Secrets Manger secret that contains a generated password for the IDE.
+`IdeUrl` 출력에는 IDE에 접근하기 위해 브라우저에 입력할 URL이 포함되어 있습니다. `IdePasswordSecret`에는 IDE용으로 생성된 비밀번호가 포함된 AWS Secrets Manager 시크릿 링크가 들어있습니다.&#x20;
 
-To retrieve the password open that URL and click the **Retrieve** button:
+비밀번호를 확인하려면 해당 URL을 열고 Retrieve 버튼을 클릭하세요:
 
 ![secretsmanager retrieve](assets/vscode-password-retrieve.webp)
 
-The password will then be available for you to copy:
+그러면 복사할 수 있는 비밀번호가 표시됩니다:
 
 ![cloudformation outputs](assets/vscode-password-visible.webp)
 
-Open the IDE URL provided and you will be prompted for the password:
+IDE URL을 열면 비밀번호를 입력하라는 메시지가 표시됩니다:
 
 ![cloudformation outputs](assets/vscode-password.webp)
 
-After submitting your password you will be presented with the initial VSCode screen:
+비밀번호를 입력하면 초기 VSCode 화면이 나타납니다:
 
 ![cloudformation outputs](assets/vscode-splash.webp)
 
-The next step is to create an EKS cluster to perform the lab exercises in. Please follow one of the guides below to provision a cluster that meets the requirements for these labs:
+다음 단계는 실습을 수행할 EKS 클러스터를 생성하는 것입니다. 아래 가이드 중 하나를 따라 이 실습에 필요한 요구사항을 충족하는 클러스터를 프로비저닝하세요:
 
 * **(Recommended)** [eksctl](using-eksctl.md)
 * [Terraform](using-terraform.md)
