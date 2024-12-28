@@ -3,27 +3,27 @@ title: Other components
 sidebar_position: 50
 ---
 
+# Other components
+
 In this lab exercise, we'll deploy the rest of the sample application efficiently using the power of Kustomize. The following kustomization file shows how you can reference other kustomizations and deploy multiple components together:
 
 ```file
 manifests/base-application/kustomization.yaml
 ```
 
-:::tip
-Notice that the catalog API is in this kustomization, didn't we already deploy it?
+:::tip Notice that the catalog API is in this kustomization, didn't we already deploy it?
 
-Because Kubernetes uses a declarative mechanism we can apply the manifests for the catalog API again and expect that because all of the resources are already created Kubernetes will take no action.
-:::
+Because Kubernetes uses a declarative mechanism we can apply the manifests for the catalog API again and expect that because all of the resources are already created Kubernetes will take no action. :::
 
 Apply this kustomization to our cluster to deploy the rest of the components:
 
-```bash wait=10
+```bash
 $ kubectl apply -k ~/environment/eks-workshop/base-application
 ```
 
 After this is complete we can use `kubectl wait` to make sure all the components have started before we proceed:
 
-```bash timeout=200
+```bash
 $ kubectl wait --for=condition=Ready --timeout=180s pods \
   -l app.kubernetes.io/created-by=eks-workshop -A
 ```
@@ -61,6 +61,4 @@ ui          ui               1/1     1            1           90s
 
 The sample application is now deployed and ready to provide a foundation for us to use in the rest of the labs in this workshop!
 
-:::tip
-If you want to understand more about Kustomize take a look at the [optional module](../kustomize/index.md) provided in this workshop.
-:::
+:::tip If you want to understand more about Kustomize take a look at the [optional module](../index-1.md) provided in this workshop. :::
