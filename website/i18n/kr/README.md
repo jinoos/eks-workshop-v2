@@ -5,7 +5,7 @@ sidebar_position: 1
 
 # EKS Workshop
 
-이 워크샵은 [EKS Workshop](https://www.eksworkshop.com/)의 한글 버전입니다.&#x20;
+이 워크샵은 [EKS Workshop](https://www.eksworkshop.com/)의 한글 버전입니다. 
 
 ## EKS Workshop
 
